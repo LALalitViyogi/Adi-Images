@@ -3,7 +3,7 @@ from tkinter import ttk,messagebox
 from tkinter import scrolledtext as st
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from GoogleImageScrapper import GoogleImageScraper
+from ImageScrapper import ImageScraper
 import os
 
 class imagescrape():
@@ -54,9 +54,11 @@ class imagescrape():
    search_keys=list(self.data.keys())
    for search_key in search_keys:
      number_of_images=int(self.data[search_key])
-     image_scrapper = GoogleImageScraper(self.webdriver_path,self.image_path,search_key,number_of_images,self.headless,self.min_resolution,self.max_resolution)
+     image_scrapper = ImageScraper(self.webdriver_path,self.image_path,search_key,number_of_images,self.headless,self.min_resolution,self.max_resolution)
      image_urls = image_scrapper.find_image_urls()
      image_scrapper.save_images(image_urls)
+   
+   return messagebox.showwarning("Download Completed","Congratulations, All Images Are Saved") and self.reset()
  
  def reset(self):
   self.tag_entry.delete(0,tk.END)
